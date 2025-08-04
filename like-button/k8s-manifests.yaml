@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: like-button-deployment
+  labels:
+    app: like-button
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: like-button
+  template:
+    metadata:
+      labels:
+        app: like-button
+    spec:
+      containers:
+      - name: like-button-app
+        image: like-button-app:1.0.0
+        imagePullPolicy: Never # Use the image loaded into kind
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: like-button-service
+spec:
+  selector:
+    app: like-button
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort # Expose the service outside the cluster
