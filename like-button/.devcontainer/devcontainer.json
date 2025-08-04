@@ -1,0 +1,11 @@
+{
+  "name": "Node.js & TypeScript",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "20"
+    }
+  },
+  "forwardPorts": [5173],
+  "postCreateCommand": "yarn install"
+}
